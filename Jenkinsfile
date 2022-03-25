@@ -8,7 +8,7 @@ pipeline {
   agent {
     kubernetes {
       //cloud 'kubernetes'
-      serviceAccount 'jenkins-helm'
+      serviceAccount 'jenkins'
       containerTemplate {
         name 'helm-pod'
         image 'alpine/helm:3.1.1'
