@@ -32,7 +32,7 @@ pipeline {
                   if [ $DEPLOYED == 0 ] ; then
                      helm install example-chart ./ --namespace node-app
                   else 
-                    helm upgrade example-chart ./ --set=image.tag=10 -n node-app
+                    helm upgrade example-chart ./ --set=image.tag=${BUILD_NUMBER} -n node-app
                   fi
                   echo "Deployed!"
                   '''
