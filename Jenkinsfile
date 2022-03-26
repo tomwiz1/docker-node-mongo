@@ -28,6 +28,7 @@ pipeline {
                     
                   ) 
                   sh '''
+                  helm repo update
                   DEPLOYED=$(helm list | grep -E "example-chart" | grep DEPLOYED | wc -l)
                   if [ $DEPLOYED == 0 ] ; then
                      helm install example-chart node-mongo-app/ --namespace node-app
