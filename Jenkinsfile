@@ -28,13 +28,11 @@ pipeline {
                     
                   ) 
                   sh '''
-                  ls
-                  pwd
                   DEPLOYED=$(helm list | grep -E "example-chart" | grep DEPLOYED | wc -l)
                   if [ $DEPLOYED == 0 ] ; then
-                     helm install example-chart ../node-mongo-app/ --namespace node-app
+                     helm install example-chart ./ --namespace node-app
                   else 
-                    helm upgrade example-chart ../node-mongo-app/ --set=image.tag=10 -n node-app
+                    helm upgrade example-chart ./ --set=image.tag=10 -n node-app
                   fi
                   echo "Deployed!"
                   '''
