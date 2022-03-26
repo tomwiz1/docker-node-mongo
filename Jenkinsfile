@@ -21,7 +21,7 @@ pipeline {
       stage('Run Helm') {
           steps {
               container('helm-pod'){
-                  sh 'helm upgrade example-chart ./ --set=image.tag=10'
+                  sh 'helm upgrade example-chart ./ --set=image.tag='${env.BUILD_NUMBER}''
               }
 
           }
