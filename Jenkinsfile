@@ -25,7 +25,7 @@ pipeline {
                     url: 'git@github.com:tomwiz1/node-mongo-app.git',
                     branch: 'main',
                     credentialsId: 'jenkins-github-ssh'
-                    cre
+                    
                   ) 
                   sh 'helm upgrade example-chart ./ --set=image.tag=${env.BUILD_NUMBER}'
               }
