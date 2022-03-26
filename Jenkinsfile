@@ -11,7 +11,11 @@ pipeline {
   stages {
       stage('Run Helm') {
           steps {
-                  git url: 'git@github.com:tomwiz1/node-mongo-app.git', branch: 'main'
+                git (
+                url: 'git@github.com:tomwiz1/node-mongo-app.git',
+                branch: 'main',
+                credentialsId: tomwiz1
+            )
                   sh 'cd node-mongo-app'
                   sh 'helm upgrade example-chart ./ --set=image.tag=${env.BUILD_NUMBER}'
               }
