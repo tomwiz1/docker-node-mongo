@@ -28,7 +28,7 @@ pipeline {
                     
                   ) 
                   sh '''
-                  DEPLOYED=$(helm list | grep -E "example-chart" | grep DEPLOYED | wc -l)
+                  DEPLOYED=$(helm list -n node-app | grep -E "example-chart" | grep DEPLOYED | wc -l)
                   if [ $DEPLOYED == 0 ] ; then
                      helm install example-chart ./ --namespace node-app --set=image.tag=${BUILD_NUMBER}
                   else 
