@@ -6,22 +6,25 @@ node {
 
 pipeline {
   agent {
-      docker { image 'alpine/helm:3.1.1' }
+    kubernetes {
+      //cloud 'kubernetes'
+      serviceAccount 'jenkins'
+      containerTemplate {
+        name 'helm-pod'
+        image 'alpine/helm:3.1.1'
+        ttyEnabled true
+        command 'cat'
+      }
     }
+  }
   stages {
       stage('Run Helm') {
           steps {
-                git (
-                url: 'git@github.com:tomwiz1/node-mongo-app.git',
-                branch: 'main',
-                credentialsId: 'tomwiz1'
-            )
-                  sh 'cd node-mongo-app'
-                  sh 'helm upgrade example-chart ./ --set=image.tag=${env.BUILD_NUMBER}'
+              container('helm-pod'){
+                  sh 'helm upgrade example-chart ./ --set=image.tag='${env.BUILD_NUMBER}''
               }
 
           }
       }
   }
-
-
+}
