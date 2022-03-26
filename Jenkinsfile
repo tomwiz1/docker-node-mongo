@@ -27,7 +27,7 @@ pipeline {
                     credentialsId: 'jenkins-github-ssh'
                     
                   ) 
-                  sh 'helm upgrade example-chart ./ --set=image.tag=${env.BUILD_NUMBER}'
+                  sh 'helm upgrade example-chart ./ --set=image.tag=10'
               }
 
           }
