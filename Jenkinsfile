@@ -14,7 +14,7 @@ pipeline {
                 git (
                 url: 'git@github.com:tomwiz1/node-mongo-app.git',
                 branch: 'main',
-                credentialsId: tomwiz1
+                credentialsId: 'tomwiz1'
             )
                   sh 'cd node-mongo-app'
                   sh 'helm upgrade example-chart ./ --set=image.tag=${env.BUILD_NUMBER}'
