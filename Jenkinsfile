@@ -8,7 +8,6 @@ pipeline {
   agent {
       docker { image: 'alpine/helm:3.1.1' }
     }
-  }
   stages {
       stage('Run Helm') {
           steps {
@@ -20,6 +19,5 @@ pipeline {
           }
       }
   }
-}
 
 
