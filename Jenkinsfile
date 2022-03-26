@@ -27,7 +27,15 @@ pipeline {
                     credentialsId: 'jenkins-github-ssh'
                     
                   ) 
-                  sh 'helm upgrade example-chart ./ --set=image.tag=10'
+                  sh '''
+                  DEPLOYED=$(helm list | grep -E "example-chart" | grep DEPLOYED | wc 1)
+                  if [ $DEPLOYED == 0 ] ; then
+                     helm install --name example-chart ./
+                  else 
+                    helm upgrade example-chart ./ --set=image.tag=10
+                  fi
+                  echo "Deployed!"
+                  '''
               }
 
           }
