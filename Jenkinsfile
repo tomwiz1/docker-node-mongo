@@ -28,7 +28,7 @@ pipeline {
                     
                   ) 
                   sh '''
-                  DEPLOYED=$(helm list | grep -E "example-chart" | grep DEPLOYED | wc 1)
+                  DEPLOYED=$(helm list | grep -E "example-chart" | grep DEPLOYED | wc -l)
                   if [ $DEPLOYED == 0 ] ; then
                      helm install --name example-chart ./
                   else 
