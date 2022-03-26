@@ -21,7 +21,9 @@ pipeline {
       stage('Run Helm') {
           steps {
               container('helm-pod'){
-                  sh 'helm upgrade example-chart ./ --set=image.tag='${env.BUILD_NUMBER}''
+                  git url: 'git@github.com:tomwiz1/node-mongo-app.git', branch: 'main'
+                  sh 'cd node-mongo-app'
+                  sh 'helm upgrade example-chart ./ --set=image.tag='${env.BUILD_NUMBER}
               }
 
           }
